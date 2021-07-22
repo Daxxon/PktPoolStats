@@ -12,6 +12,6 @@ public class WebController {
   @GetMapping("/")
   public PoolStatResponse home(Model model) throws Exception {
     HTTPClient httpClient = new HTTPClient();
-    return httpClient.sendGet();
+    return httpClient.getPoolStats();
   }
 }

@@ -1,6 +1,8 @@
 package com.github.daxxon.PKTStats;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URLEncoder;
@@ -17,11 +19,11 @@ public class HTTPClient {
     .version(HttpClient.Version.HTTP_2)
     .build();
 
-  public PoolStatResponse sendGet() throws Exception {
+  public PoolStatResponse sendGet(String myUri) throws Exception {
 
     HttpRequest request = HttpRequest.newBuilder()
       .GET()
-      .uri(URI.create("http://paymaker.pktco.in/whotopay"))
+      .uri(URI.create(myUri))
       .setHeader("User-Agent", "Java 11 HttpClient Bot")
       .build();
 
@@ -38,6 +40,18 @@ public class HTTPClient {
     return poolStatResponse;
 
   }
+
+  public JSONObject getPoolStats(){
+    this.sendGet("http://paymaker.pktco.in/whotopay");
+    this.sendGet("http://pool.pkteer.com");
+    this.sendGet("ttp://pool.pktpool.io");
+    this.sendGet("http://pool.pkt.world");
+    this.sendGet("http://pool.srizbi.com");
+    this.sendGet("http://noworries.tech/pool");
+    JSONObject poolJSON = new JSONObject();
+
+    return poolJSON;
+  };
 
 //  public void sendPost() throws Exception {
 //
